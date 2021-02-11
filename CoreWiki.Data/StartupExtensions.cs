@@ -27,6 +27,11 @@ namespace CoreWiki.Data.EntityFramework
 					services.AddEntityFrameworkNpgsql();
 					optionsBuilder = options => options.UseNpgsql(connectionString);
 					break;
+				case "sql server":
+					services.AddEntityFrameworkSqlServer();
+					connectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "Data Source=.;Initial Catalog=Wiki;Persist Security Info=True;";
+					optionsBuilder = options => options.UseSqlServer(connectionString);
+					break;
 				default:
 					services.AddEntityFrameworkSqlite();
 					connectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "DataSource=./App_Data/wikiContent.db";

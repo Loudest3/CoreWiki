@@ -67,6 +67,10 @@ namespace CoreWiki.Areas.Identity
 				case "postgres":
 					optionsBuilder = options => options.UseNpgsql(connectionString);
 					break;
+				case "sql server":
+					connectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "Data Source=.;Initial Catalog=Wiki;Persist Security Info=True;";
+					optionsBuilder = options => options.UseSqlServer(connectionString);
+					break;
 				default:
 					connectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "DataSource =./App_Data/wikiIdentity.db";
 					optionsBuilder = options => options.UseSqlite(connectionString, o =>
